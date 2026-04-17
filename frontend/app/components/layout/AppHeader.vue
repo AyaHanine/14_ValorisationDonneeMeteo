@@ -58,7 +58,7 @@ const items = computed<NavigationMenuItem[]>(() => [
         <template #title>
             <div class="flex gap-2 mr-12">
                 <UIcon name="i-lucide-hexagon" class="size-7" />
-                <h1 class="font-title font-normal">Infoclimat</h1>
+                <h1 class="font-title font-normal">DataClimat</h1>
             </div>
         </template>
         <template #default>
