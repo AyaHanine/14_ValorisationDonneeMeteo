@@ -78,7 +78,7 @@ export interface NationalIndicatorResponse {
     time_series: NationalIndicatorDataPoint[];
 }
 
-// ===== Ecart à la normale (Temperature Deviation) types =====
+// ===== Écart à la normale (Temperature Deviation) types =====
 
 export interface TemperatureDeviationParams {
     date_start: string;

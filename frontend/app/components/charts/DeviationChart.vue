@@ -102,7 +102,7 @@ const barOption = computed<ECOption>(() => {
             type: "value",
             gridIndex: index,
             splitNumber: 3,
-            name: "Ecart à la normale (°C)",
+            name: "Écart à la normale (°C)",
             nameRotate: 90,
             nameLocation: "middle",
             nameGap: 40,
@@ -112,7 +112,7 @@ const barOption = computed<ECOption>(() => {
         })),
         series: stationsAndNational.flatMap((_, index) => [
             {
-                name: "Ecart positif",
+                name: "Écart positif",
                 type: "bar",
                 stack: `deviation-${index}`,
                 datasetIndex: index,
@@ -123,7 +123,7 @@ const barOption = computed<ECOption>(() => {
                 yAxisIndex: index,
             },
             {
-                name: "Ecart négatif",
+                name: "Écart négatif",
                 type: "bar",
                 stack: `deviation-${index}`,
                 datasetIndex: index,

@@ -8,7 +8,7 @@ const items = computed<NavigationMenuItem[]>(() => [
         label: "Températures",
         children: [
             {
-                label: "Ecart à la normale",
+                label: "Écart à la normale",
                 to: "/ecart-normale",
                 icon: "i-lucide-move-horizontal",
                 active: route.path.startsWith("/ecart-normale"),
