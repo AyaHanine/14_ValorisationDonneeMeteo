@@ -587,9 +587,6 @@ class TemperatureDeviationOverviewResponseSerializer(serializers.Serializer):
 class NationalIndicatorKpiQuerySerializer(serializers.Serializer):
     date_start = serializers.DateField(required=True)
     date_end = serializers.DateField(required=True)
-    type = serializers.ChoiceField(
-        choices=["hot", "cold"], required=False, allow_null=True, default=None
-    )
 
     def validate(self, attrs):
         if attrs["date_start"] > attrs["date_end"]:
@@ -599,18 +596,23 @@ class NationalIndicatorKpiQuerySerializer(serializers.Serializer):
         return attrs
 
 
-class NationalIndicatorKpiDaySerializer(serializers.Serializer):
-    date = serializers.DateField()
-    temperature = serializers.FloatField()
-    baseline_mean = serializers.FloatField()
-    baseline_std_dev = serializers.FloatField()
+class KpiPeriodStatsSerializer(serializers.Serializer):
+    hot_peak_count = serializers.IntegerField()
+    cold_peak_count = serializers.IntegerField()
+    days_above_baseline = serializers.IntegerField()
+    days_below_baseline = serializers.IntegerField()
+    itn_mean = serializers.FloatField(allow_null=True)
+    deviation_from_normal = serializers.FloatField(allow_null=True)
 
 
 class NationalIndicatorKpiResponseSerializer(serializers.Serializer):
-    count = serializers.IntegerField()
+    hot_peak_count = serializers.IntegerField()
+    cold_peak_count = serializers.IntegerField()
+    days_above_baseline = serializers.IntegerField()
+    days_below_baseline = serializers.IntegerField()
     itn_mean = serializers.FloatField(allow_null=True)
     deviation_from_normal = serializers.FloatField(allow_null=True)
-    days = NationalIndicatorKpiDaySerializer(many=True)
+    previous = KpiPeriodStatsSerializer()
 
 
 class RecordsGraphQuerySerializer(serializers.Serializer):
