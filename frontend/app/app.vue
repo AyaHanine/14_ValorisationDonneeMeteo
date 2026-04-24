@@ -4,7 +4,6 @@ import AppHeader from "./components/layout/AppHeader.vue";
 import { fr } from "@nuxt/ui/locale";
 
 const colorMode = useColorMode();
-colorMode.value = "dark";
 colorMode.preference = "dark";
 </script>
 
