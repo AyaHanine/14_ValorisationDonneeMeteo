@@ -31,7 +31,7 @@ const heroData = {
             :description="heroData.description"
         />
         <div class="flex gap-24 flex-col">
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4 bg-elevated rounded-lg p-14">
                 <div class="flex items-end gap-4">
                     <div class="flex flex-col gap-1">
                         <p class="text-sm text-muted">Période</p>
@@ -40,28 +40,32 @@ const heroData = {
                             :items="periodOptions"
                         />
                     </div>
-                    <UButtonGroup>
+                    <UFieldGroup>
                         <UButton
+                            :ui="{
+                                base:
+                                    store.typeRecords === 'hot'
+                                        ? 'bg-rose-200 text-rose-600 ring-1 ring-rose-300 pointer-events-none'
+                                        : '',
+                            }"
                             color="neutral"
-                            :variant="
-                                store.typeRecords === 'hot'
-                                    ? 'subtle'
-                                    : 'outline'
-                            "
+                            variant="outline"
                             label="Chaud"
                             @click="store.typeRecords = 'hot'"
                         />
                         <UButton
+                            :ui="{
+                                base:
+                                    store.typeRecords === 'cold'
+                                        ? 'bg-blue-200 text-blue-650! dark:text-blue-700! ring-1 ring-blue-300 pointer-events-none'
+                                        : '',
+                            }"
                             color="neutral"
-                            :variant="
-                                store.typeRecords === 'cold'
-                                    ? 'subtle'
-                                    : 'outline'
-                            "
+                            variant="outline"
                             label="Froid"
                             @click="store.typeRecords = 'cold'"
                         />
-                    </UButtonGroup>
+                    </UFieldGroup>
                 </div>
 
                 <hr class="border-accented" />

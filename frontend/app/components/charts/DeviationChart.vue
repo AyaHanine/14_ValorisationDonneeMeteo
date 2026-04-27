@@ -3,7 +3,8 @@ import * as echarts from "echarts/core";
 import langFR from "~/i18n/langFR.js";
 import type { TemperatureDeviationGraphResponse } from "~/types/api";
 import type { SelectBarAdapter } from "~/components/ui/commons/selectBar/types";
-import { COLORS } from "~/constants/colors";
+import { useMapColors } from "~/constants/colors";
+import { FONT_CHARTS } from "~/constants/fonts";
 import type { EChartsOption } from "echarts";
 import { useDeviationStore } from "#imports";
 import { CHART_ATTRIBUTION_GRAPHIC } from "~/constants/chartAttribution";
@@ -42,6 +43,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const mapColors = useMapColors();
 
 const deviationStore = useDeviationStore();
 const { selectedStationsAndNational } = storeToRefs(useDeviationStore());
@@ -95,7 +97,10 @@ const barOption = computed<ECOption>(() => {
             axisTick: { show: false },
             nameLocation: "middle",
             nameGap: 25,
-            nameTextStyle: { fontSize: 11, fontWeight: "bold" },
+            nameTextStyle: {
+                fontSize: FONT_CHARTS.fontSize,
+                fontWeight: "bold",
+            },
             axisPointer: { type: "line", label: { show: false } },
         })),
         yAxis: stationsAndNational.map((_, index) => ({
@@ -106,8 +111,11 @@ const barOption = computed<ECOption>(() => {
             nameRotate: 90,
             nameLocation: "middle",
             nameGap: 40,
-            nameTextStyle: { fontSize: 10, fontWeight: "bold" },
-            axisLabel: { fontSize: 10 },
+            nameTextStyle: {
+                fontSize: FONT_CHARTS.fontSize,
+                fontWeight: "bold",
+            },
+            axisLabel: { fontSize: FONT_CHARTS.fontSize },
             splitLine: { lineStyle: { type: "dashed" } },
         })),
         series: stationsAndNational.flatMap((_, index) => [
@@ -117,7 +125,7 @@ const barOption = computed<ECOption>(() => {
                 stack: `deviation-${index}`,
                 datasetIndex: index,
                 encode: { x: "date", y: "deviation_positive" },
-                color: COLORS.hot,
+                color: mapColors.value.hot,
                 tooltip: { show: true },
                 xAxisIndex: index,
                 yAxisIndex: index,
@@ -128,7 +136,7 @@ const barOption = computed<ECOption>(() => {
                 stack: `deviation-${index}`,
                 datasetIndex: index,
                 encode: { x: "date", y: "deviation_negative" },
-                color: COLORS.cold,
+                color: mapColors.value.cold,
                 tooltip: { show: true },
                 xAxisIndex: index,
                 yAxisIndex: index,

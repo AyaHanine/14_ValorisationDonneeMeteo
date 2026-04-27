@@ -20,7 +20,8 @@ import {
     countByPeriod,
     scatterSeries,
 } from "~/utils/recordsChartUtils";
-import { COLORS } from "~/constants/colors";
+import { useMapColors } from "~/constants/colors";
+import { FONT_CHARTS, GRAPH_RECORDS_POSITION } from "~/constants/fonts";
 
 echarts.registerLocale("FR", langFR);
 echarts.use([
@@ -41,10 +42,11 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const mapColors = useMapColors();
 // provide init-options
 const renderer = ref<"svg" | "canvas">("canvas");
 const initOptions = computed(() => ({
-    height: 520,
+    height: GRAPH_RECORDS_POSITION.height,
     locale: "FR",
     renderer: renderer.value,
 }));
@@ -125,7 +127,10 @@ const option = computed<ECOption>(() => {
             max: props.adapter.pickedDateEnd?.value,
             nameLocation: "middle",
             nameGap: 25,
-            nameTextStyle: { fontSize: 11, fontWeight: "bold" },
+            nameTextStyle: {
+                fontSize: FONT_CHARTS.fontSize,
+                fontWeight: "bold",
+            },
             axisPointer: { type: "line", label: { show: false } },
             boundaryGap: ["3%", "3%"],
             ...{
@@ -148,8 +153,11 @@ const option = computed<ECOption>(() => {
             nameRotate: 90,
             nameLocation: "middle",
             nameGap: 40,
-            nameTextStyle: { fontSize: 10, fontWeight: "bold" },
-            axisLabel: { fontSize: 10 },
+            nameTextStyle: {
+                fontSize: FONT_CHARTS.fontSize,
+                fontWeight: "bold",
+            },
+            axisLabel: { fontSize: FONT_CHARTS.fontSize },
             splitLine: { lineStyle: { type: "dashed" } },
         })),
         series: [
@@ -158,7 +166,7 @@ const option = computed<ECOption>(() => {
                     name: "Records de chaleur",
                     datasetIndex: index * 2,
                     encode: { x: "date", y: "value" },
-                    color: COLORS.hot,
+                    color: mapColors.value.hot,
                     symbolSize: 5,
                     xAxisIndex: index,
                     yAxisIndex: index,
@@ -167,7 +175,7 @@ const option = computed<ECOption>(() => {
                     name: "Records de froid",
                     datasetIndex: index * 2 + 1,
                     encode: { x: "date", y: "value" },
-                    color: COLORS.cold,
+                    color: mapColors.value.cold,
                     symbolSize: 5,
                     xAxisIndex: index,
                     yAxisIndex: index,
@@ -179,7 +187,7 @@ const option = computed<ECOption>(() => {
                           name: "Records de chaleur",
                           datasetIndex: territoryPlots.length * 2,
                           encode: { x: "period", y: "hot" },
-                          color: COLORS.hot,
+                          color: mapColors.value.hot,
                           stack: "records",
                           xAxisIndex: 1,
                           yAxisIndex: 1,
@@ -188,7 +196,7 @@ const option = computed<ECOption>(() => {
                           name: "Records de froid",
                           datasetIndex: territoryPlots.length * 2,
                           encode: { x: "period", y: "cold" },
-                          color: COLORS.cold,
+                          color: mapColors.value.cold,
                           stack: "records",
                           xAxisIndex: 1,
                           yAxisIndex: 1,
