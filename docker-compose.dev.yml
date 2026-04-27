@@ -63,8 +63,22 @@ services:
     networks:
       - app_net
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    depends_on:
+      - prometheus
+    ports:
+      - "3001:3000"
+    networks:
+      - app_net
+    volumes:
+      - grafana-data:/var/lib/grafana
+
 volumes:
   timescaledb-data:
+    driver: local
+  grafana-data:
     driver: local
 networks:
   app_net:
