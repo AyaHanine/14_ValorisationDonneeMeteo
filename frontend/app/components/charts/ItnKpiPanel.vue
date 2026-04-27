@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-3 w-52 shrink-0 py-2">
+    <div class="flex flex-col gap-3 md:w-52 md:shrink-0 py-2">
         <Card
             title="ITN moyen"
             tooltip-text="Moyenne de l'Indicateur Thermique National sur la période sélectionnée."
@@ -99,8 +99,8 @@ const store = useItnStore();
 const { pickedDateStart, pickedDateEnd } = storeToRefs(store);
 
 const params = computed<NationalIndicatorKpiParams>(() => ({
-    date_start: dateToStringYMD(new Date(pickedDateStart.value)),
-    date_end: dateToStringYMD(new Date(pickedDateEnd.value)),
+    date_start: dateToStringYMD(pickedDateStart.value),
+    date_end: dateToStringYMD(pickedDateEnd.value),
 }));
 
 const { data: kpi } = useNationalIndicatorKpi(params);
