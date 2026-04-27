@@ -1,4 +1,4 @@
-FROM node:24-alpine AS build
+FROM dhi.io/node:25-debian13-sfw-dev AS build
 
 WORKDIR /app
 
