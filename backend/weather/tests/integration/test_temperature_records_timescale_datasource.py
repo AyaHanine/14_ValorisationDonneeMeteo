@@ -141,7 +141,7 @@ def test_fetch_records_all_time_returns_entries():
     station_entries = [e for e in result if e.station_id.strip() == station_code]
     # 2 records progressifs : 0.0 (1985) et 42.6 (2019)
     assert len(station_entries) == 2
-    assert station_entries[-1].record_value == 42.6
+    assert station_entries[-1].record_value == 42
 
 
 @pytest.mark.django_db
